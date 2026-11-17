@@ -8,7 +8,7 @@ The current local backend, shared deployment, historical project files/tests, sa
 
 The installed v7 uses part-list completeness before engine preference. An older saved SQL file used the earlier ranking design. Public SQL comes from the installed definitions, not that older file. Local source includes matched run-start timestamps for both report filenames. Source equivalence with the deployed executable has not been independently established; both were preserved privately.
 
-The owner confirmed that the initial phase resulted in 60,000 successful catalog application-line imports after cleanup and validation, and that they built the tool from scratch after listening to team needs. An import ledger and exact historical code version were not independently reconciled. Current report counts must not be substituted for that result.
+The owner confirmed that the initial phase resulted in 62k successful catalog application-line imports after cleanup and validation, and that they built the tool from scratch after listening to team needs. An import ledger and exact historical code version were not independently reconciled. Current report counts must not be substituted for that result.
 
 ## Sanitized source checks
 
@@ -21,7 +21,7 @@ The owner confirmed that the initial phase resulted in 60,000 successful catalog
 
 ## Recorded real report run
 
-The deployed app completed one owner-authorized run on November 17, 2026 using the current list: 96 pairs expanded to 899 pair-years. Validation returned 439 valid and 460 invalid pair-years. The gap workbook contained 45,940 rows: 39,115 selected-reference candidates, 3,912 excluded for missing region, 1,521 excluded because another reference was selected, and 1,392 requiring review because no reference contained all eligible parts. These are current analysis rows, not new catalog imports or the historical 60,000-line result.
+The deployed app completed one owner-authorized run on November 17, 2026 using the current list: 96 pairs expanded to 899 pair-years. Validation returned 439 valid and 460 invalid pair-years. The gap workbook contained 45,940 rows: 39,115 selected-reference candidates, 3,912 excluded for missing region, 1,521 excluded because another reference was selected, and 1,392 requiring review because no reference contained all eligible parts. These are current analysis rows, not new catalog imports or the historical 62k-line result.
 
 The GIF/video is an edited sequence of actual window captures, with waiting time shortened and worksheet views cropped for readability. No processing or report values were simulated. Deployed executable and settings-file SHA-256 hashes matched before and after recording. The recording-only simulator and its local project were removed; the operational app was not changed.
 

@@ -1,12 +1,10 @@
-# SisterTwin Vehicles
+# Automotive Application Coverage Tool
 
-## Automotive catalog coverage analysis and application import preparation
+A desktop application that identifies where parts cataloged for one vehicle may also apply to a related vehicle but are missing from its catalog coverage. It validates vehicle identities against VCdb and produces reports supporting review and preparation of import files. The initial phase resulted in **62k additional application lines imported after cleanup and validation**.
 
-SisterTwin helps automotive product managers and catalog teams investigate a practical question: **Do we already sell a part that may also apply to a related vehicle, but have not recorded that application in our catalog?**
+The application is named SisterTwin in the source code and recorded interface. I built it from scratch after listening to the team's needs, using SQL Server, Python, and C#/.NET. The reports support subsequent manual review, import-file preparation, validation, and catalog loading.
 
-I built the tool from scratch after listening to the team's needs. It turns vehicle relationships and catalog knowledge into a repeatable workflow using SQL Server, Python, and a C# Windows desktop application. The application generates Excel validation and gap-analysis reports. The broader workflow uses those results to prepare application import files, which are reviewed and validated before catalog loading.
-
-**Initial result: 60,000 additional application lines successfully imported into the catalog after cleanup and validation.** This is my confirmed, initial-phase business result. It counts application records, not unique parts, vehicles, or sales opportunities. It is separate from the candidate counts produced by later versions of the analysis.
+The 62k result counts successfully imported application records from the initial phase, not unique parts or vehicles. It is separate from candidate counts produced by later versions of the analysis.
 
 ## See the app in use
 
@@ -118,6 +116,6 @@ The [offline checks](tests/) exercise the actual Python modules with database ca
 
 ## My contribution and the next improvement
 
-I built SisterTwin from scratch in response to the team's needs, translating automotive catalog knowledge into data transformations, selection rules, exception handling, and a usable reporting workflow. The initial phase supported 60,000 successfully imported application lines after cleanup and validation. The exact historical code version and import ledger have not been independently reconciled here, so that result is not attributed to the current v7 candidate count.
+I built SisterTwin from scratch in response to the team's needs, translating automotive catalog knowledge into data transformations, selection rules, exception handling, and a usable reporting workflow. The initial phase supported 62k successfully imported application lines after cleanup and validation. The exact historical code version and import ledger have not been independently reconciled here, so that result is not attributed to the current v7 candidate count.
 
 The most valuable next improvement is an approval-to-import audit trail: stable candidate identifiers, reviewer decisions, validation outcomes, and imported record identifiers. That would connect the analysis directly to verified catalog additions while preserving the human review boundary.
