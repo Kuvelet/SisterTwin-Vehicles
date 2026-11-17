@@ -1,0 +1,17 @@
+Educational sample verification: November 17, 2026
+Command: python -m unittest discover -s sample -v
+test_all_winner_details_survive (test_selection.SelectionTests.test_all_winner_details_survive) ... ok
+test_blank_part_fails_entire_eligible_group (test_selection.SelectionTests.test_blank_part_fails_entire_eligible_group) ... ok
+test_complete_set_beats_preferred_engine (test_selection.SelectionTests.test_complete_set_beats_preferred_engine) ... ok
+test_empty_and_ineligible_only (test_selection.SelectionTests.test_empty_and_ineligible_only) ... ok
+test_engine_categories_before_row_count (test_selection.SelectionTests.test_engine_categories_before_row_count) ... ok
+test_equal_size_different_sets_require_review (test_selection.SelectionTests.test_equal_size_different_sets_require_review) ... ok
+test_group_isolation (test_selection.SelectionTests.test_group_isolation) ... ok
+test_null_region_does_not_affect_union_or_blank_part_guard (test_selection.SelectionTests.test_null_region_does_not_affect_union_or_blank_part_guard) ... ok
+test_order_independence (test_selection.SelectionTests.test_order_independence) ... ok
+test_row_count_then_alphabetical (test_selection.SelectionTests.test_row_count_then_alphabetical) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK
