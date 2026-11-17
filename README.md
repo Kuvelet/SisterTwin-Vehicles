@@ -104,7 +104,7 @@ The current selection algorithm checks part-list completeness before engine pref
 
 ## Reading and rebuilding the implementation
 
-This repository contains the **sanitized real application source**, not a rewritten demonstration. Operational paths, database/server identifiers, a company-specific schema name, branding, and private configuration have been removed or replaced. Production records, logs, reports, binaries, and private history are excluded. The exact private implementation archive is maintained separately.
+This repository contains the **sanitized real application source**, not a rewritten demonstration. In the source package, operational paths, database/server identifiers, a company-specific schema name, branding, and private configuration have been removed or replaced. Downloadable production datasets, raw logs, workbooks, binaries, and private history are excluded. The separately authorized recording shows the actual deployed interface and visible report data. The exact private implementation archive is maintained separately.
 
 There is no fabricated catalog or VCdb database bundled to make this appear self-contained. Full operation requires compatible external databases and environment configuration. The documentation explains those contracts and the reconstruction steps:
 
