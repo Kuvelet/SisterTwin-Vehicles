@@ -1,4 +1,4 @@
-# Automotive Application Coverage Tool
+# Vehicle Application Coverage Tool
 
 A desktop application that identifies where parts cataloged for one vehicle may also apply to a related vehicle but are missing from its catalog coverage. It validates vehicle identities against VCdb and produces reports supporting review and preparation of import files. The initial phase resulted in **62k additional application lines imported after cleanup and validation**.
 
