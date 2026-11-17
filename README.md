@@ -1,103 +1,117 @@
 # SisterTwin Vehicles
 
-**Turning automotive catalog knowledge into a repeatable coverage-review workflow.**
+## Automotive catalog coverage analysis and application import preparation
 
-Automotive product managers and catalog teams need to know where an existing part may be missing from a related vehicle's catalog coverage. SisterTwin compares related vehicles, checks vehicle identities and target eligibility, and produces Excel reports that explain which candidates to include, exclude, or review.
+SisterTwin helps automotive product managers and catalog teams investigate a practical question: **Do we already sell a part that may also apply to a related vehicle, but have not recorded that application in our catalog?**
 
-**Initial business result: 60,000 additional application lines successfully imported into the catalog after cleanup and validation.** This project-owner-reported result counts application records, not unique parts, vehicles, or sales opportunities. It comes from the initial phase of the project and is separate from the current application's candidate-report counts.
+I built the tool from scratch after listening to the team's needs. It turns vehicle relationships and catalog knowledge into a repeatable workflow using SQL Server, Python, and a C# Windows desktop application. The application generates Excel validation and gap-analysis reports. The broader workflow uses those results to prepare application import files, which are reviewed and validated before catalog loading.
 
-I built SisterTwin from scratch after listening to the team's needs, translating automotive catalog knowledge into explicit analysis rules and a usable reporting workflow. The implementation combines SQL Server analysis, Python orchestration, and a C# Windows desktop interface.
+**Initial result: 60,000 additional application lines successfully imported into the catalog after cleanup and validation.** This is my confirmed, initial-phase business result. It counts application records, not unique parts, vehicles, or sales opportunities. It is separate from the candidate counts produced by later versions of the analysis.
 
-**Repository scope:** a public case study and independently written, fictional-data educational sample. It does not contain the company's production implementation, catalog data, database connections, or an automatic catalog importer.
+## The catalog problem, in plain language
 
-![Actual Windows Forms interface rendered offline with fictional vehicle pairs](assets/desktop-preview.png)
+An automotive parts catalog does more than list products. It describes **which vehicles each part applies to, and under which conditions**. A relay might apply to a particular make, model, and year, with additional restrictions for its engine, installation position, region, transmission, or other characteristics.
 
-*Actual interface rendered from an isolated source copy in offline preview mode. Vehicle records are fictional, branding is omitted, and no requests or database operations were performed. The preview is not a live completed run.*
+An **application line** is one such part-to-vehicle record with its conditions. In SisterTwin's actual data model, the core fields include make, model, year, part number, and description, together with fields such as Engine, Position, Region, Submodel, Quantity, FootNote, and Note. The same part can have several application lines because different vehicle configurations or conditions need separate records.
 
-## From a team need to a usable tool
+A catalog can contain a part's application on one vehicle while lacking the equivalent product description on a related vehicle. That is a potential coverage gap worth investigating. It is not yet proof that the part fits, and it does not necessarily require developing a new product.
 
-The business need was to turn related-vehicle knowledge into a systematic way to investigate missing catalog coverage. That requires comparing descriptions, checking source application details against target eligibility, and resolving competing reference vehicles. I built a workflow that makes those checks repeatable and exposes unresolved cases to the catalog team.
+### Why sister/twin vehicles are useful
 
-The desktop app lets users select a vehicle list, generate reports, follow the run log, and open the results without operating the underlying SQL scripts. The earlier team's exact tools and manual sequence are not documented here; no before/after time-saving claim is made.
+In this workflow, sister/twin vehicles are candidate related vehicles identified by the team's relationship list. They may share a platform, components, or engineering, which gives the catalog team a useful starting point for comparing coverage.
 
-## What an application line means
+A relationship is not a blanket interchangeability rule. Model years, engines, trims, regions, positions, and application notes can differ. SisterTwin therefore checks vehicle identities and target eligibility at the application level, compares competing references, and makes unresolved cases visible for human review.
 
-An application line associates a part with a vehicle and its fitment conditions. In this project that includes make, model, year, part number, description, and potentially engine, position, region, submodel, transmission, notes, and other qualifiers. For example, fictional part `DEMO-001` might have separate rows for different positions or engine conditions on the same vehicle. One part can therefore produce many application lines.
+## What the tool takes in and produces
 
-The analysis report adds reference-vehicle and missing-vehicle columns, grouping IDs, an expansion reason, and an inclusion decision. A report row is a **candidate based on an existing reference application**. It is not yet an approved target application or proof of physical interchangeability.
+| Input | What it contributes |
+| --- | --- |
+| Vehicle-pair CSV | Two make/model combinations and an inclusive year range: `Years, Make_A, Model_A, Make_B, Model_B` |
+| Existing catalog applications | The parts, descriptions, and detailed conditions already associated with reference vehicles |
+| VCdb vehicle identities | A check that each make/model/year exists in the vehicle configuration database |
+| PIM vehicle dictionary | Target-vehicle make/model/year, engine text, and region combinations used for eligibility matching |
 
-## Why sister/twin vehicles help
+PIM means product information management: the system used to maintain catalog product and application information. VCdb is the vehicle configuration database. Neither is included as a public dataset here.
 
-Related vehicles may share engineering or a platform, making them useful starting points for finding coverage gaps. A relationship is a research lead. It does not establish that every part, engine, trim, market, or model year is interchangeable.
+The workflow has two kinds of deliverable:
 
-SisterTwin separates three questions:
+- **Excel analysis reports generated by the application.** A vehicle-validation workbook shows valid and invalid pair-years. A gap-analysis workbook preserves reference application detail, target-vehicle information, grouping and expansion explanations, and Include, Exclude, or Needs review decisions.
+- **Application import files prepared from reviewed results.** These contain target application records in the format required by the receiving catalog system. In the implementation captured here, this preparation, PIM validation, overlap review, and import are subsequent manual steps. There is no automatic import-file generator or PIM importer in the application source.
 
-1. Does each make/model/year exist in VCdb, the vehicle configuration database?
-2. Is a product description present on one vehicle and absent on its related vehicle?
-3. Does the target vehicle dictionary support the reference application's engine text and return a region?
+This distinction matters: a row marked **Include** is an algorithm-selected candidate. It becomes a catalog addition only after the separate review, preparation, validation, and import process.
 
-Those checks narrow the review work. Catalog specialists still evaluate fitment conditions and prepare, validate, and import approved records separately.
+## How the analysis works
 
-## Workflow
+1. **Validate the vehicle list and expand its years.** A pair covering 2020–2022 becomes three pair-year records. The expected expansion is checked against the SQL result.
+2. **Validate both vehicle identities.** The workflow checks each side's make/model/year in VCdb. Both must exist for that pair-year to enter gap analysis. Invalid results remain in the validation workbook.
+3. **Find missing descriptions in both directions.** If vehicle A has a product description that vehicle B lacks, A becomes a reference for B. The reverse comparison is performed as well. This detects missing descriptions, rather than every missing individual part within descriptions the target already has.
+4. **Collect the detailed reference applications.** The analysis retains the part numbers and their engines, positions, notes, regions, and other qualifiers.
+5. **Check target eligibility.** It matches the target make/model/year and the reference engine text against the PIM dictionary. Rows with no returned target region are excluded from selection, but remain visible in the report. This is a dictionary match, not a physical-fit certification.
+6. **Compare the eligible part lists.** For each target make/model/year/description, one reference must contain every distinct eligible part found across the competing references. Otherwise, the group goes to review. Eligible rows with a missing part number also require review.
+7. **Resolve ties and preserve the selected reference's details.** When several references contain the complete part set, deterministic engine, application-row-count, and alphabetical rules select one. Every eligible application row from that reference is kept; the algorithm does not reduce it to one row per part.
+8. **Publish both reports together.** The user receives a matched report set and can inspect the decisions before preparing any import files.
 
 ```mermaid
 flowchart TD
-    A[Related-vehicle CSV and year ranges] --> B[Validate input and expand each year]
-    B --> C[Check both vehicle identities in VCdb]
-    C --> D[Find description gaps in both directions]
-    D --> E[Collect source applications and match target dictionary]
-    E --> F{One reference contains all eligible parts?}
-    F -->|No| G[Needs review]
-    F -->|Yes| H[Apply deterministic tie-breaks]
-    H --> I[Preserve eligible rows from selected reference]
-    C --> J[Vehicle validation workbook]
-    G --> K[Gap workbook: include, exclude, review]
-    I --> K
-    K --> L[Human review and import preparation]
-    L --> M[PIM validation, overlap checks, approved import]
+    A[Related-vehicle list and year ranges] --> B[Expand years and validate vehicle identities]
+    B --> C[Find description gaps in both directions]
+    C --> D[Collect reference applications and match target eligibility]
+    D --> E[Compare eligible part sets and select one complete reference]
+    B --> F[Excel vehicle-validation report]
+    E --> G[Excel gap report: Include, Exclude, Needs review]
+    G --> H[Manual review and application import-file preparation]
+    H --> I[PIM validation and overlap checks]
+    I --> J[Approved catalog import]
 ```
 
-## The important engineering decision
+### Why the reference-selection rule matters
 
-The current algorithm compares **distinct eligible part sets before ranking engines**. For a target make/model/year/description, it forms the union of parts across eligible references. A reference can win only if it contains that entire union.
+Suppose reference A has parts `{P1, P2}`, and reference B has `{P1, P2, P3}`. B contains the full eligible set and is selected. If A has `{P1, P2}` while B has `{P1, P3}`, neither contains the full set: the eligible group needs review. The tool does not silently combine competing references or choose by majority.
 
-If A contains `{P1, P2}` and B contains `{P1, P2, P3}`, B wins. If A contains `{P1, P2}` and B contains `{P1, P3}`, neither is complete: the group requires review. The tool does not manufacture a combined reference by mixing those lists.
+Only after completeness is established does it prefer all-blank engine qualifiers, then all-specified engines, then mixed engines. Remaining ties use more eligible application rows, followed by alphabetical make/model. These are explicit business rules, not a claim that one engine category is inherently more accurate.
 
-When multiple complete references remain, it prefers all-blank engines, then all-specified engines, then mixed engines; next, more eligible application rows; finally, make/model alphabetical order. Every eligible application row from the winner is preserved. Distinct parts determine completeness; application rows determine detail preservation and one tie-break.
+See the [small worked example](docs/worked-example.md) for how one existing application becomes a candidate and how an ambiguous group is handled. It is an explanatory illustration, not a sample database or separate runnable application.
 
-See the [fictional worked example](docs/worked-example.md), [technical design](docs/technical-design.md), and [verification and limitations](docs/verification.md).
+## The desktop workflow
 
-## Inspect the report output
+![SisterTwin Windows Forms interface with fictional records in an offline preview](assets/desktop-preview.png)
 
-![Fictional report rows with Include, Exclude, and Needs review decisions](assets/gap-report-preview.png)
+*The actual interface was rendered from an isolated source copy, using fictional vehicle pairs with company branding omitted. No requests were submitted and no database connections were made for this image.*
 
-The [fictional Excel examples](evidence/fictional-report-examples.xlsx) contain a compact gap report and an invented vehicle-validation fixture. They show selected fields and the real decision-label vocabulary in a simplified presentation, not a production export. The sample's 11 candidate rows yield four Include, three Exclude, and four Needs review decisions; none represents an approved import.
+The user previews the current vehicle list or selects a new CSV, submits report generation, follows the status and live log, and opens the completed reports. A background worker runs the database workflow on a configured Windows host. Users do not need to operate the SQL scripts or install Python on their own computers.
 
-## Run the educational sample
+The shared file queue separates the desktop interaction from the long-running work. The worker handles requests serially, records the exact input used, and publishes completion only after verifying the expected report files. Closing the client does not cancel the workflow.
 
-Requires Python 3.10 or later; no database, account, or third-party packages.
+## Technical implementation
 
-```sh
-python sample/demo.py
-python -m unittest discover -s sample -v
-```
+| Component | Responsibility | Source |
+| --- | --- | --- |
+| C# / .NET 8 Windows Forms | CSV parsing and preview, request submission, worker status, live logs | [Desktop source](src/AppSource/) |
+| Python background worker | Queue claiming, request validation, heartbeat, subprocess execution and completion checks | [Worker source](src/Worker/) |
+| Python coordinator + pyodbc | SQL stages, input snapshots, transfers, locks, validation and error handling | [Workflow source](src/Workflow/) |
+| SQL Server | Inclusive year expansion, bidirectional gaps, dictionary joins, part-set completeness and reference selection | [Installed procedure exports](sql/) |
+| Python + openpyxl | Streamed Excel output, text preservation, limits and integrity checks, paired report publication | [Gap exporter](src/Workflow/export_sistertwin_v7.py) |
 
-The sample writes a fictional review report to `sample/output.json`. It demonstrates selection after gap discovery and dictionary matching. It does not implement VCdb, the full SQL pipeline, the production UI, or catalog import. Its string ordering is Python's ordering, not SQL Server collation.
+The design uses a SQL application lock and per-stage transactions. It does not claim one distributed transaction across databases and files: a failure in a later stage can leave earlier database stages committed. That is why logs, explicit failure states, and controlled retries matter.
 
-## What the desktop application implements
+The current selection algorithm checks part-list completeness before engine preference. Earlier versions ranked engines first; a saved SQL export was found to be older than the installed procedure. This repository's SQL source was captured from the installed definitions. Earlier SSIS experiments are not the current application's orchestration layer.
 
-| Layer | Responsibility |
-| --- | --- |
-| C# / .NET 8 Windows Forms | Preview and validate CSV input; submit requests; display worker status and live logs; open reports |
-| Shared file queue | Publish complete requests, retain input snapshots, and communicate status |
-| Python + pyodbc | Serialize runs, coordinate SQL stages and transfers, validate counts, handle failures |
-| SQL Server | Expand years, validate identities, find gaps, match eligibility, select references |
-| Python + openpyxl | Stream detailed Excel reports, preserve textual part numbers, publish both workbooks together |
+## Reading and rebuilding the implementation
 
-The current workflow uses Python orchestration. Earlier SSIS experiments are not the deployed application architecture. The worker starts after Windows sign-in; it is not a Windows service or web API.
+This repository contains the **sanitized real application source**, not a rewritten demonstration. Operational paths, database/server identifiers, a company-specific schema name, branding, and private configuration have been removed or replaced. Production records, logs, reports, binaries, and private history are excluded. The exact private implementation archive is maintained separately.
 
-## Review boundaries
+There is no fabricated catalog or VCdb database bundled to make this appear self-contained. Full operation requires compatible external databases and environment configuration. The documentation explains those contracts and the reconstruction steps:
 
-`Include` means the selection rule chose a reference. It does not mean the candidate is approved for catalog import. `Needs review` rows must not slip into a load by merely removing `Exclude` rows. Source qualifiers and overlaps need explicit review, followed by target-field preparation and PIM validation.
+- [Technical design and decisions](docs/technical-design.md)
+- [Source map and data contracts](docs/source-map.md)
+- [Build, configuration, and recovery guide](docs/reconstruction.md)
+- [Sanitization changes and omissions](docs/sanitization.md)
+- [Verification and known limitations](docs/verification.md)
 
-The most valuable next improvement is a traceable approval-to-import reconciliation: connect each candidate, reviewer decision, validation result, and imported record so business impact can be audited without confusing candidates with additions.
+The [offline checks](tests/) exercise the actual Python modules with database calls blocked. They are implementation tests, not a second sample application, and they do not certify real-world fitment or production SQL integration.
+
+## My contribution and the next improvement
+
+I built SisterTwin from scratch in response to the team's needs, translating automotive catalog knowledge into data transformations, selection rules, exception handling, and a usable reporting workflow. The initial phase supported 60,000 successfully imported application lines after cleanup and validation. The exact historical code version and import ledger have not been independently reconciled here, so that result is not attributed to the current v7 candidate count.
+
+The most valuable next improvement is an approval-to-import audit trail: stable candidate identifiers, reviewer decisions, validation outcomes, and imported record identifiers. That would connect the analysis directly to verified catalog additions while preserving the human review boundary.

@@ -1,22 +1,28 @@
-# Evidence and verification
+# Verification and limitations
 
-Investigation date: November 17, 2026.
+Verified November 17, 2026.
 
-| Claim | Evidence inspected | Limit |
-| --- | --- | --- |
-| Windows Forms / .NET 8 client | Current project file and UI source | Build target does not prove every user's runtime setup |
-| Python orchestration and Excel export | Current worker, coordinator, validators, and exporter | No production workflow was run for this case study |
-| Part-list-first v7 | Installed procedure definition read through a SELECT-only query | No procedure execution or database mutation |
-| Older saved SQL is stale | Archived SQL export compared with installed definition | Archived files are not deployment authority |
-| Manual catalog import | Saved project memory and referenced project chat | Report inclusion is not import approval |
-| 60,000 initial additions | Project owner confirmed successful import after cleanup and validation | Initial-phase result; exact historical version and import ledger not independently verified |
+## Sources and version authority
 
-The private backend, shared application location, project memory, and historical SQL files were accessible. The public case study omits their addresses and operational identifiers. Local code contains the October filename patch; the shared executable's exact source parity has not been independently established.
+The current local backend, shared deployment, historical project files/tests, saved project memory, and referenced project chat were inspected. Current v0/v7 procedure definitions were exported with read-only metadata queries. No production analysis procedure, importer, or worker deployment was executed for this work.
 
-The public sample is newly written educational code. Tests exercise selection invariants and fail-closed behavior. Passing them does not certify production SQL collation, database permissions, full integration behavior, or real-world part fitment. Company code and nonpublic data are not included.
+The installed v7 uses part-list completeness before engine preference. An older saved SQL file used the earlier ranking design. Public SQL comes from the installed definitions, not that older file. Local source includes matched run-start timestamps for both report filenames. Source equivalence with the deployed executable has not been independently established; both were preserved privately.
 
-The owner confirmed building the tool from scratch after listening to team needs. The earlier team's exact manual process was not supplied, so the case study does not invent one or claim measured time savings.
+The owner confirmed that the initial phase resulted in 60,000 successful catalog application-line imports after cleanup and validation, and that they built the tool from scratch after listening to team needs. An import ledger and exact historical code version were not independently reconciled. Current report counts must not be substituted for that result.
 
-Ten public sample tests passed, covering completeness before engine preference, equal-size conflicting sets, excluded-row isolation, missing part numbers, detail preservation, engine categories, row-count/alphabetical ties, input-order independence, group isolation, and empty inputs. The isolated interface build succeeded with no warnings or errors; its offline render and both fictional workbook sheets were visually inspected.
+## Sanitized source checks
 
-The screenshot uses the actual interface code in an isolated offline preview, with fictional input and no company branding. The capture source is not included. The workbook is an illustrative subset of report fields, generated from the educational sample and an invented identity fixture; it is not an actual company report.
+- The actual sanitized .NET 8 Windows Forms application passed Release single-file Windows x64 publication.
+- Thirty offline tests passed against an isolated copy of the actual Python workflow modules. These cover CSV encoding/ranges/headers, upload checksums and restoration, transaction commit/rollback behavior, transfer multiplicities, VCdb result checks, workflow locks, decision labels, literal Excel text and report dimensions, export-count mismatches, and paired report publication.
+- Tests block real SQL connections. Mocked SQL responses test orchestration behavior, not execution of the stored procedure bodies.
+- The report publisher was checked for matching timestamps, invalid timestamps, and a missing staged workbook. Workbook contents are tested separately through the real exporters.
+- Operational identifiers and credential-pattern scans were performed over the publication allowlist. Only source, documentation, test code, a generic configuration example, structural data contracts, and the offline UI image are packaged. Build outputs and actual settings are excluded.
+- Documentation links were checked against packaged files. The educational selection sample, fictional downloadable workbook, and its old test-results file are no longer part of the current package.
+
+## Limits and reconstruction risks
+
+No live end-to-end SQL run, catalog import, performance benchmark, or independent physical-fit validation was performed. The tests do not establish SQL collation equivalence, completeness of external vehicle relationships, or correctness of every source application. The raw-table DDL is reconstructed column metadata, not a full database migration including all permissions/indexes.
+
+The source retains its original coupling to named databases, a shared Windows folder, and one worker host. Those locations are now placeholders and must be configured consistently across Python, SQL, C#, and launch scripts. The settings example changes the certificate-verification default; see the sanitization record.
+
+The private backup contains 262 files, including the original backend, shared files/run history, historical project sources/tests, installed SQL metadata/definitions, dependency inventory, recovery notes, and hash manifests. Its ZIP entries were verified against SHA-256 hashes; no copied source file changed during its individual copy. It is a live snapshot, not a transactionally consistent SQL backup or an off-device disaster-recovery copy.

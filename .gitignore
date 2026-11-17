@@ -1,2 +1,9 @@
-__pycache__/
-sample/output.json
+**/bin/
+**/obj/
+**/__pycache__/
+*.pyc
+src/Config/settings.json
+private/
+Control/
+Reports/
+*.log

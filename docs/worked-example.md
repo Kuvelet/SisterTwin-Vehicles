@@ -27,4 +27,4 @@ The workflow deliberately leaves this unresolved. Combining both references woul
 
 ## Other boundaries
 
-An eligible blank part number sends the entire eligible group for review. A blank part on a NULL-region row does not poison the eligible set. When complete references have identical part sets, engine category, eligible row count, and alphabetical order settle the tie. The educational sample includes assertions for these cases.
+An eligible blank part number sends the entire eligible group for review. A blank part on a NULL-region row does not poison the eligible set. When complete references have identical part sets, engine category, eligible row count, and alphabetical order settle the tie. These examples explain the selection rules; they are not a runnable sample or real fitment recommendations.

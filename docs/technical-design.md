@@ -2,7 +2,7 @@
 
 ## Data model and transformations
 
-The input schema is `Years, Make_A, Model_A, Make_B, Model_B`. Each inclusive range becomes individual pair-years. The expected expansion is the sum of `EndYear - StartYear + 1`; the coordinator verifies the expanded count before validation. The input supports UTF-8 and Windows-1252, retaining accented vehicle names. Checks cover required fields, lengths, file size, pair count, and year ranges.
+The input schema is `Years, Make_A, Model_A, Make_B, Model_B`. Each inclusive range becomes individual pair-years. The expected expansion is the sum of `EndYear - StartYear + 1`; the coordinator verifies the expanded count before validation. The client accepts UTF-8 or Windows-1252 input, then writes canonical Windows-1252 CSV for the backend. Characters not representable in that format are rejected rather than silently lost. Checks cover required fields, lengths, file size, pair count, and year ranges.
 
 VCdb validation joins BaseVehicle to Make and Model using their IDs, then matches each input side by make/model names and year. Both sides must exist for a pair-year to enter analysis. Invalid years remain visible in the validation report. This validates identity, not the proposed relationship or fitment. The custom VCdb staging table is recreated because database refreshes can remove custom objects. Transfers compare row multiplicities, rather than trusting row totals alone.
 

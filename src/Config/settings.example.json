@@ -1,0 +1,7 @@
+{
+  "shared_root": "\\\\FILESERVER\\SisterTwin",
+  "worker_computer": "WORKERHOST",
+  "python_executable": "C:\\Program Files\\Python314\\python.exe",
+  "trust_server_certificate": false,
+  "show_progress_window": true
+}

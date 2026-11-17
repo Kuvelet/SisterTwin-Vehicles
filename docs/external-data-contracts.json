@@ -1,0 +1,420 @@
+[
+  {
+    "object": "CatalogDb.dbo.PIM_BaseApplications",
+    "columns": [
+      {
+        "name": "Archetype",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Make",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Model",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Year",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Part Number",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "PartGroup",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Category",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Description",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Position",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "cid",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Engine",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Engine Designation",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "EngineMake",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "EngineVIN",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Region",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Submodel",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Air",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Aspiration",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "BodyStyle",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "BrakeType",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "CarbNumber",
+        "type": "nvarchar",
+        "max_length_bytes": -1,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "CarbType",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Color",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Connection Type",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Cylinder Head Type",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Drive Type",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Emissions",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "ESN Range",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "FootNote",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Fuel System",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Fuel Type",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "FuelTypeName",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Lead Length",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Note",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "OE Number",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Quantity",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Split Year",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Supersession Note",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Transmission",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Vendor",
+        "type": "nvarchar",
+        "max_length_bytes": 510,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      }
+    ]
+  },
+  {
+    "object": "ProductManagementDb.dbo.v_PIM_Vehicle_Dictionary",
+    "columns": [
+      {
+        "name": "Archetype",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Make",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Model",
+        "type": "nvarchar",
+        "max_length_bytes": 200,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Year",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Engine",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Region",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Submodel",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "EngineVIN",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "cid",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "Engine Designation",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "EngineMake",
+        "type": "nvarchar",
+        "max_length_bytes": 100,
+        "precision": 0,
+        "scale": 0,
+        "nullable": true
+      }
+    ]
+  }
+]
