@@ -23,9 +23,11 @@ The private sanitization map records exact source-file hashes and identifier sub
 
 ## Excluded material
 
-Credentials, actual settings, company records and relationship-list contents, live/generated reports, logs, queue/run history, compiled executables, dependency build outputs, company artwork, older deployment packages, private project memory, and definitions of external company catalog/dictionary views are excluded.
+Credentials, actual settings, downloadable company datasets/workbooks, raw logs, queue/run history, compiled executables, dependency build outputs, standalone company artwork, older deployment packages, private project memory, and definitions of external company catalog/dictionary views are excluded from the source package.
 
-The public data-contract metadata describes input columns without providing rows or pretending to recreate the external databases. The one fictional worked example and offline UI screenshot explain behavior; they are not a second implementation.
+The owner separately authorized publishing the visible contents of a real deployed-app recording, confirming the on-screen data is not confidential. That recording shows the existing vehicle list, live progress and report excerpts, including the deployed interface's branding and operational labels. This media exception does not publish the underlying workbooks, private backup or operational configuration files.
+
+The public data-contract metadata describes input columns without providing rows or pretending to recreate the external databases. The small fictional worked example explains the selection rule; it is not a second implementation. The old offline UI screenshot has been replaced by the authorized real-run recording.
 
 The previous educational sample and its generated workbook/test evidence have been removed from the current repository contents. Earlier commits retain history; this change is not a history purge.
 

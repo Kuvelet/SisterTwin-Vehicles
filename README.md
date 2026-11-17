@@ -8,6 +8,14 @@ I built the tool from scratch after listening to the team's needs. It turns vehi
 
 **Initial result: 60,000 additional application lines successfully imported into the catalog after cleanup and validation.** This is my confirmed, initial-phase business result. It counts application records, not unique parts, vehicles, or sales opportunities. It is separate from the candidate counts produced by later versions of the analysis.
 
+## See the app in use
+
+![Actual SisterTwin desktop app: review vehicle pairs, generate a real report, follow live progress, and inspect the resulting Excel workbooks](assets/sistertwin-live.gif)
+
+*Recorded from the deployed app on November 17, 2026. This is a real report run using the existing vehicle list and actual results; no processing is simulated. Waiting time is shortened. The app and its setup were not modified for the recording.*
+
+[Watch the recording as a video](assets/sistertwin-live.mp4) · [View a still image](assets/sistertwin-live.png)
+
 ## The catalog problem, in plain language
 
 An automotive parts catalog does more than list products. It describes **which vehicles each part applies to, and under which conditions**. A relay might apply to a particular make, model, and year, with additional restrictions for its engine, installation position, region, transmission, or other characteristics.
@@ -74,9 +82,7 @@ See the [small worked example](docs/worked-example.md) for how one existing appl
 
 ## The desktop workflow
 
-![SisterTwin Windows Forms interface with fictional records in an offline preview](assets/desktop-preview.png)
-
-*The actual interface was rendered from an isolated source copy, using fictional vehicle pairs with company branding omitted. No requests were submitted and no database connections were made for this image.*
+The [recording above](#see-the-app-in-use) shows the deployed application submitting a real job and opening its resulting Excel reports.
 
 The user previews the current vehicle list or selects a new CSV, submits report generation, follows the status and live log, and opens the completed reports. A background worker runs the database workflow on a configured Windows host. Users do not need to operate the SQL scripts or install Python on their own computers.
 
